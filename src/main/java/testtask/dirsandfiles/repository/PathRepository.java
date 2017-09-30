@@ -1,7 +1,11 @@
 package testtask.dirsandfiles.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import testtask.dirsandfiles.domain.PathEntity;
 
-public interface PathRepository extends JpaRepository<PathEntity, Integer> {
+import java.util.List;
+
+public interface PathRepository {
+    void saveAll(List<PathEntity> paths);
+
+    List<PathEntity> getAll(int snapshotId);
 }

@@ -1,36 +1,36 @@
 package testtask.dirsandfiles.domain;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "snapshots", uniqueConstraints =
-    @UniqueConstraint(columnNames = {"date_time", "dir"}, name = "snapshots_unique_date_time_dir_idx"))
 public class SnapshotEntity extends BaseEntity {
-    @NotNull
-    @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;
 
-    @NotBlank
-    @Column(name = "dir", nullable = false)
     private String dir;
 
-    @Column(name = "dirs_count")
     private int dirsCount;
 
-    @Column(name = "files_count")
     private int filesCount;
 
-    @Column(name = "total_size")
     private long totalSize;
 
     public SnapshotEntity() {
+    }
+
+    public SnapshotEntity(Integer id) {
+        super(id);
+    }
+
+    public SnapshotEntity(LocalDateTime dateTime, String dir, int dirsCount, int filesCount, long totalSize) {
+        this(null, dateTime, dir, dirsCount, filesCount, totalSize);
+    }
+
+    public SnapshotEntity(Integer id, LocalDateTime dateTime, String dir, int dirsCount, int filesCount, long totalSize) {
+        super(id);
+        this.dateTime = dateTime;
+        this.dir = dir;
+        this.dirsCount = dirsCount;
+        this.filesCount = filesCount;
+        this.totalSize = totalSize;
     }
 
     public LocalDateTime getDateTime() {
@@ -71,5 +71,16 @@ public class SnapshotEntity extends BaseEntity {
 
     public void setTotalSize(long totalSize) {
         this.totalSize = totalSize;
+    }
+
+    @Override
+    public String toString() {
+        return "SnapshotEntity{" +
+                "dateTime=" + dateTime +
+                ", dir='" + dir + '\'' +
+                ", dirsCount=" + dirsCount +
+                ", filesCount=" + filesCount +
+                ", totalSize=" + totalSize +
+                '}';
     }
 }

@@ -1,26 +1,24 @@
 package testtask.dirsandfiles.domain;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-@Entity
-@Table(name = "paths")
 public class PathEntity extends BaseEntity {
-    @NotBlank
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "size")
     private Long size;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "snapshot_id", referencedColumnName = "id", nullable = false)
-    private SnapshotEntity snapshot;
+    private int snapshotId;
 
     public PathEntity() {
+    }
+
+    public PathEntity(String name, Long size, int snapshotId) {
+        this(null, name, size, snapshotId);
+    }
+
+    public PathEntity(Integer id, String name, Long size, int snapshotId) {
+        super(id);
+        this.name = name;
+        this.size = size;
+        this.snapshotId = snapshotId;
     }
 
     public String getName() {
@@ -39,11 +37,11 @@ public class PathEntity extends BaseEntity {
         this.size = size;
     }
 
-    public SnapshotEntity getSnapshot() {
-        return snapshot;
+    public int getSnapshotId() {
+        return snapshotId;
     }
 
-    public void setSnapshot(SnapshotEntity snapshot) {
-        this.snapshot = snapshot;
+    public void setSnapshotId(int snapshotId) {
+        this.snapshotId = snapshotId;
     }
 }

@@ -1,7 +1,12 @@
 package testtask.dirsandfiles.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import testtask.dirsandfiles.domain.SnapshotEntity;
 
-public interface SnapshotRepository extends JpaRepository<SnapshotEntity, Integer> {
+import java.util.List;
+
+public interface SnapshotRepository {
+    List<SnapshotEntity> getAll();
+
+    SnapshotEntity save(SnapshotEntity entity);
 }
