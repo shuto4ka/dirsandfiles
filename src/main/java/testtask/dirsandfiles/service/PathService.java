@@ -1,11 +1,11 @@
 package testtask.dirsandfiles.service;
 
-import testtask.dirsandfiles.domain.PathEntity;
+import testtask.dirsandfiles.domain.Path;
 
 import java.util.List;
 
 public interface PathService {
-    void addAll(List<PathEntity> paths);
+    void addAll(List<Path> paths);
 
-    List<PathEntity> getAllSorted(int snapshotId);
+    List<Path> getAllSorted(int snapshotId);
 }

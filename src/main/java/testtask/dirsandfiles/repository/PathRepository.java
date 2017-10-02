@@ -1,11 +1,11 @@
 package testtask.dirsandfiles.repository;
 
-import testtask.dirsandfiles.domain.PathEntity;
+import testtask.dirsandfiles.domain.Path;
 
 import java.util.List;
 
 public interface PathRepository {
-    void saveAll(List<PathEntity> paths);
+    void saveAll(List<Path> paths);
 
-    List<PathEntity> getAll(int snapshotId);
+    List<Path> getAll(int snapshotId);
 }

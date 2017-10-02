@@ -1,0 +1,23 @@
+.header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#pathsDataTable {
+    min-width: 400px;
+    max-width: 400px;
+}
+.modal-dialog {
+    width: 430px;
+}
+.fixed-max-width-text-block {
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    -o-text-overflow: ellipsis !important;
+    -ms-text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    max-width: 250px;
+}
+#dateTime {
+    padding-left: 10px;
+}

@@ -1,8 +1,11 @@
 package testtask.dirsandfiles.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
-public class SnapshotEntity extends BaseEntity {
+public class Snapshot extends BaseEntity {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime dateTime;
 
     private String dir;
@@ -13,18 +16,22 @@ public class SnapshotEntity extends BaseEntity {
 
     private long totalSize;
 
-    public SnapshotEntity() {
+    public Snapshot() {
     }
 
-    public SnapshotEntity(Integer id) {
-        super(id);
-    }
+//    public Snapshot(Integer id) {
+//        super(id);
+//    }
 
-    public SnapshotEntity(LocalDateTime dateTime, String dir, int dirsCount, int filesCount, long totalSize) {
-        this(null, dateTime, dir, dirsCount, filesCount, totalSize);
+    public Snapshot(String dir) {
+        this.dir = dir;
     }
+//
+//    public Snapshot(LocalDateTime dateTime, String dir, int dirsCount, int filesCount, long totalSize) {
+//        this(null, dateTime, dir, dirsCount, filesCount, totalSize);
+//    }
 
-    public SnapshotEntity(Integer id, LocalDateTime dateTime, String dir, int dirsCount, int filesCount, long totalSize) {
+    public Snapshot(Integer id, LocalDateTime dateTime, String dir, int dirsCount, int filesCount, long totalSize) {
         super(id);
         this.dateTime = dateTime;
         this.dir = dir;
@@ -74,8 +81,32 @@ public class SnapshotEntity extends BaseEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Snapshot snapshot = (Snapshot) o;
+
+        if (dirsCount != snapshot.dirsCount) return false;
+        if (filesCount != snapshot.filesCount) return false;
+        if (totalSize != snapshot.totalSize) return false;
+        if (!dateTime.equals(snapshot.dateTime)) return false;
+        return dir.equals(snapshot.dir);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = dateTime.hashCode();
+        result = 31 * result + dir.hashCode();
+        result = 31 * result + dirsCount;
+        result = 31 * result + filesCount;
+        result = 31 * result + (int) (totalSize ^ (totalSize >>> 32));
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return "SnapshotEntity{" +
+        return "Snapshot{" +
                 "dateTime=" + dateTime +
                 ", dir='" + dir + '\'' +
                 ", dirsCount=" + dirsCount +

@@ -1,11 +1,14 @@
 package testtask.dirsandfiles.service;
 
-import testtask.dirsandfiles.domain.SnapshotEntity;
+import testtask.dirsandfiles.domain.Snapshot;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface SnapshotService {
-    List<SnapshotEntity> getAll();
+    List<Snapshot> getAll();
 
-    SnapshotEntity add(String dir);
+    Snapshot getByDateTimeAndDir(LocalDateTime dateTime, String dir);
+
+    Snapshot add(Snapshot snapshot);
 }

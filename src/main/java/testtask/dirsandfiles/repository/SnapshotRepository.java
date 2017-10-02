@@ -1,12 +1,14 @@
 package testtask.dirsandfiles.repository;
 
-import org.springframework.stereotype.Repository;
-import testtask.dirsandfiles.domain.SnapshotEntity;
+import testtask.dirsandfiles.domain.Snapshot;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface SnapshotRepository {
-    List<SnapshotEntity> getAll();
+    List<Snapshot> getAll();
 
-    SnapshotEntity save(SnapshotEntity entity);
+    Snapshot getByDateTimeAndDir(LocalDateTime dateTime, String dir);
+
+    Snapshot save(Snapshot entity);
 }

@@ -2,8 +2,9 @@ package testtask.dirsandfiles.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import testtask.dirsandfiles.domain.PathEntity;
+import testtask.dirsandfiles.domain.Path;
 import testtask.dirsandfiles.repository.PathRepository;
+import testtask.dirsandfiles.util.PathUtil;
 
 import java.util.List;
 
@@ -17,14 +18,14 @@ public class PathServiceImpl implements PathService {
     }
 
     @Override
-    public void addAll(List<PathEntity> paths) {
+    public void addAll(List<Path> paths) {
         repository.saveAll(paths);
     }
 
     @Override
-    public List<PathEntity> getAllSorted(int snapshotId) {
-        List<PathEntity> list = repository.getAll(snapshotId);
-        //TODO sort
-        return list;
+    public List<Path> getAllSorted(int snapshotId) {
+        List<Path> paths = repository.getAll(snapshotId);
+        paths.sort(PathUtil::comparePaths);
+        return paths;
     }
 }

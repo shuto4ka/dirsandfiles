@@ -1,8 +1,8 @@
 package testtask.dirsandfiles.domain;
 
-public abstract class BaseEntity {
-    public static final int START_SEQ = 100000;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+public abstract class BaseEntity {
     private Integer id;
 
     BaseEntity() {
@@ -20,6 +20,7 @@ public abstract class BaseEntity {
         this.id = id;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return this.id == null;
     }
