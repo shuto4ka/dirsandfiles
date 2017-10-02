@@ -40,3 +40,21 @@ function failNoty(event, jqXHR, options, jsExc) {
         timeout:3000
     }).show();
 }
+
+function compareDatesAsc(a,b) {
+    var x = createDateFromStr(a),
+        y = createDateFromStr(b);
+    return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+}
+
+function compareDatesDesc(a,b) {
+    var x = createDateFromStr(a),
+        y = createDateFromStr(b);
+    return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
+}
+
+function createDateFromStr(str) {
+    //dd.MM.yyyy HH:mm
+    return new Date(str.substr(6, 4), str.substr(3, 2), str.substr(0, 2),
+        str.substr(11, 2), str.substr(14, 2));
+}

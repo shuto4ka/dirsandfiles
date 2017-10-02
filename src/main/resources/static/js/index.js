@@ -7,6 +7,10 @@ $(function () {
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(event, jqXHR, options, jsExc);
     });
+
+    $.fn.dataTableExt.oSort['ru_date-asc'] = compareDatesAsc;
+    $.fn.dataTableExt.oSort['ru_date-desc'] = compareDatesDesc;
+
     snapshotsDataTable = $("#snapshotsDataTable").DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -21,7 +25,8 @@ $(function () {
                 "visible": false
             },
             {
-                "data": "dateTime"
+                "data": "dateTime",
+                "type": "ru_date"
             },
             {
                 "data": "dir"
@@ -56,7 +61,7 @@ $(function () {
             data: {
                 dir: $("#new-dir").val()
             },
-            success: function() {
+            success: function () {
                 $("#new-dir").val("");
                 snapshotsDataTable.ajax.reload()
             },
@@ -64,7 +69,7 @@ $(function () {
                 snapshotsDataTable.ajax.url(ajaxUrl).load();
             }
         });
-    })    
+    })
 });
 
 function initPathsDataTable(url) {
