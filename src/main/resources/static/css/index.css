@@ -3,13 +3,10 @@
     padding-bottom: 20px;
 }
 
-#pathsDataTable {
-    min-width: 400px;
-    max-width: 400px;
-}
 .modal-dialog {
     width: 430px;
 }
+
 .fixed-max-width-text-block {
     overflow: hidden;
     text-overflow: ellipsis !important;
@@ -18,6 +15,21 @@
     white-space: nowrap !important;
     max-width: 250px;
 }
+
+#pathsDataTable_wrapper .col-sm-5 {
+    width: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+#pathsDataTable_wrapper .col-sm-7 {
+    width: 100%;
+}
+
 #dateTime {
     padding-left: 10px;
+}
+
+#pathsDataTable {
+    min-width: 400px;
+    max-width: 400px;
 }

@@ -10,7 +10,7 @@ function formatBytes(bytes) {
 }
 
 function getDirAndDateTimeById(dataTable, id) {
-    for(var i = 0; i < dataTable.rows().data().length; i++) {
+    for (var i = 0; i < dataTable.rows().data().length; i++) {
         if (id === dataTable.cell(i, 0).data()) {
             return {
                 dateTime: dataTable.cell(i, 1).data(),
@@ -37,20 +37,20 @@ function failNoty(event, jqXHR, options, jsExc) {
         text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + errorInfo.error + "<br>" + errorInfo.message,
         type: "error",
         layout: "bottomRight",
-        timeout:3000
+        timeout: 3000
     }).show();
 }
 
-function compareDatesAsc(a,b) {
+function compareDatesAsc(a, b) {
     var x = createDateFromStr(a),
         y = createDateFromStr(b);
-    return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
 
-function compareDatesDesc(a,b) {
+function compareDatesDesc(a, b) {
     var x = createDateFromStr(a),
         y = createDateFromStr(b);
-    return ((x < y) ? 1 : ((x > y) ?  -1 : 0));
+    return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 
 function createDateFromStr(str) {
