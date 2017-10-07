@@ -21,7 +21,7 @@ import static testtask.dirsandfiles.TestData.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class, TestConfig.class})
 @Sql(scripts = "classpath:db/populate_db.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class SnapshotServiceImplTest {
+public class SnapshotServiceTest {
     @Autowired
     private SnapshotService service;
 
