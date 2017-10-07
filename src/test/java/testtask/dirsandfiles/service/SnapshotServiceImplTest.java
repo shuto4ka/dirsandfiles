@@ -1,6 +1,5 @@
 package testtask.dirsandfiles.service;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,14 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import testtask.dirsandfiles.Application;
 import testtask.dirsandfiles.TestConfig;
-import testtask.dirsandfiles.TestData;
 import testtask.dirsandfiles.domain.Snapshot;
+import testtask.dirsandfiles.util.exception.SnapshotCreationFailed;
 
 import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static testtask.dirsandfiles.TestData.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class, TestConfig.class})
@@ -24,22 +27,30 @@ public class SnapshotServiceImplTest {
 
     @Test
     public void testGetByDateTimeAndDir() throws Exception {
-        Assert.assertEquals(TestData.SNAPSHOT_1,
-                service.getByDateTimeAndDir(TestData.SNAPSHOT_1.getDateTime(), TestData.SNAPSHOT_1.getDir()));
+        assertThat(SNAPSHOT_1)
+                .isEqualToComparingFieldByField(service.getByDateTimeAndDir(SNAPSHOT_1.getDateTime(), SNAPSHOT_1.getDir()));
     }
 
     @Test
     public void testGetAll() throws Exception {
-        Assert.assertEquals(Arrays.asList(TestData.SNAPSHOT_1, TestData.SNAPSHOT_2), service.getAll());
+        assertThat(Arrays.asList(SNAPSHOT_1, SNAPSHOT_2))
+                .usingFieldByFieldElementComparator()
+                .containsExactlyElementsOf(service.getAll());
     }
 
     @Test
     public void testAdd() throws Exception {
-        Assert.assertEquals(TestData.getCreatedSnapshot(), service.add(new Snapshot(TestData.TEST_DIR)));
+        Snapshot added = service.add(new Snapshot(TEST_DIR));
+        assertThat(added.getId()).isNotNull();
+
+        List<Snapshot> actual = service.getAll();
+        assertThat(Arrays.asList(getCreatedSnapshot(), SNAPSHOT_1, SNAPSHOT_2))
+                .usingFieldByFieldElementComparator()
+                .containsExactlyInAnyOrder(actual.toArray(new Snapshot[actual.size()]));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = SnapshotCreationFailed.class)
     public void testAddDuplicate() throws Exception {
-        service.add(new Snapshot(TestData.SNAPSHOT_2.getDir()));
+        service.add(new Snapshot(SNAPSHOT_2.getDir()));
     }
 }

@@ -25,4 +25,20 @@ public abstract class BaseEntity {
         return this.id == null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !getClass().equals(o.getClass())) {
+            return false;
+        }
+        BaseEntity that = (BaseEntity) o;
+        return getId() != null && getId().equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return (getId() == null) ? 0 : getId();
+    }
 }

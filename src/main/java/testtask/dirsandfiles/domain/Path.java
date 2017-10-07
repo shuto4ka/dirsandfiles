@@ -46,29 +46,10 @@ public class Path extends BaseEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Path path = (Path) o;
-
-        if (!name.equals(path.name)) return false;
-        if (size != null ? !size.equals(path.size) : path.size != null) return false;
-        return snapshotId != null ? snapshotId.equals(path.snapshotId) : path.snapshotId == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (snapshotId != null ? snapshotId.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "Path{" +
-                "name='" + name + '\'' +
+                "id=" + super.getId() +
+                ", name='" + name + '\'' +
                 ", size=" + size +
                 ", snapshotId=" + snapshotId +
                 '}';
