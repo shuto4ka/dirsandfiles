@@ -20,7 +20,10 @@ public class PathUtil {
         Files.walkFileTree(path, EnumSet.noneOf(FileVisitOption.class), 1, new SimpleFileVisitor<java.nio.file.Path>() {
             @Override
             public FileVisitResult visitFile(java.nio.file.Path file, BasicFileAttributes attrs) throws IOException {
-                result.add(new Path(file.getFileName().toString(), attrs.isDirectory() ? null : attrs.size(), null));
+                result.add(Path.builder()
+                        .name(file.getFileName().toString())
+                        .size(attrs.isDirectory() ? null : attrs.size())
+                        .build());
                 return FileVisitResult.CONTINUE;
             }
         });

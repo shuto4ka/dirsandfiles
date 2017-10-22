@@ -25,8 +25,8 @@ public class PathServiceTest {
 
     @Test
     public void testAddAll() throws Exception {
-        Path newPath1 = new Path("path1", 100L, SNAPSHOT_2.getId());
-        Path newPath2 = new Path("path2", 200L, SNAPSHOT_2.getId());
+        Path newPath1 = Path.builder().name("path1").size(100L).snapshotId(SNAPSHOT_2.getId()).build();
+        Path newPath2 = Path.builder().name("path2").size(200L).snapshotId(SNAPSHOT_2.getId()).build();
         List<Path> testData = Arrays.asList(newPath1, newPath2);
         service.addAll(testData);
 
